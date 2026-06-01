@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urban Kicks — Street Your Style</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f5f5;
+    --bg3: #eeeeee;
+    --black: #0d0d0d;
+    --dark: #1a1a1a;
+    --mid: #555555;
+    --light: #999999;
+    --border: #e0e0e0;
+    --accent: #111111;
+    --tag-bg: #111111;
+    --tag-color: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--black);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; width: 100%; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 5vw;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 4px;
+    color: var(--black);
+  }
+  .logo span { color: var(--mid); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--mid);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  .nav-cta {
+    background: var(--black);
+    color: #fff;
+    padding: 0.6rem 1.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--mid); transform: scale(1.04); }
+
+  .hamburger {
+    display: none;
+    flex-direction: column; gap: 5px;
+    cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--black); transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 60px; left: 0; right: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 5vw;
+    z-index: 99;
+    flex-direction: column; gap: 1.2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    color: var(--dark);
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 5vw;
+    padding-top: 80px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    gap: 2rem;
+  }
+
+  .hero-stripe {
+    position: absolute;
+    width: 2px; height: 200%;
+    background: linear-gradient(to bottom, transparent, var(--border), transparent);
+    top: -50%; left: 50%;
+    transform: rotate(12deg);
+    pointer-events: none;
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0.35rem 1rem;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 8.5rem);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    color: var(--black);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero-title .line2 { color: var(--mid); display: block; }
+  .hero-title .line3 {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--black);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--mid);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 400px;
+    line-height: 1.75;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.3s ease both; }
+
+  .btn-primary {
+    background: var(--black);
+    color: #fff;
+    padding: 0.95rem 2.2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    border: none; cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-primary:hover { background: var(--mid); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--black);
+    padding: 0.95rem 1.8rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    border: 2px solid var(--border); cursor: pointer;
+    transition: all 0.25s;
+  }
+  .btn-secondary:hover { border-color: var(--black); }
+
+  /* ─── HERO VISUAL ─── */
+  .hero-visual {
+    position: relative; z-index: 2;
+    display: flex; justify-content: center; align-items: center;
+    height: 70vh;
+    min-height: 380px;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .sneaker-stage {
+    position: relative;
+    width: min(480px, 90vw);
+    height: min(480px, 90vw);
+  }
+
+  /* ── Glow shadow under the shoe ── */
+  .sneaker-glow {
+    position: absolute;
+    bottom: 8%; left: 50%;
+    transform: translateX(-50%);
+    width: 60%; height: 40px;
+    background: rgba(0,0,0,0.12);
+    border-radius: 50%;
+    filter: blur(20px);
+    opacity: 0.6;
+    transition: background 0.8s ease;
+    z-index: 1;
+  }
+
+  /* ── Each slide ── */
+  .sneaker-slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transform: scale(0.88) rotate(-4deg);
+    transition: all 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+  }
+  .sneaker-slide.active {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+
+  /* ── The actual image ── */
+  .sneaker-img {
+    width: min(420px, 85vw);
+    height: min(340px, 70vw);
+    object-fit: contain;           /* keeps proportions, no crop */
+    object-position: center;
+    filter: drop-shadow(0 16px 40px rgba(0,0,0,0.22));
+    transition: filter 0.4s ease;
+  }
+
+  /* Float animation only on the active slide image */
+  .sneaker-slide.active .sneaker-img {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* ── Fallback placeholder shown when image fails to load ── */
+  .sneaker-img.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg2);
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    color: var(--light);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-align: center;
+  }
+
+  .color-dots {
+    position: absolute;
+    bottom: -10px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 10px;
+    z-index: 3;
+  }
+  .dot {
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .dot.active { transform: scale(1.5); border-color: var(--black); }
+
+  .badge-float {
+    position: absolute;
+    top: 4%; right: 0%;
+    background: var(--black);
+    color: #fff;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    width: 80px; height: 80px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; line-height: 1.1;
+    animation: spin-badge 8s linear infinite;
+    z-index: 3;
+  }
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    background: var(--black);
+    padding: 0.75rem 0;
+    white-space: nowrap;
+  }
+  .marquee-track {
+    display: inline-block;
+    animation: marquee 18s linear infinite;
+  }
+  .marquee-track span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    color: #fff;
+    margin: 0 2rem;
+  }
+
+  /* ─── SECTIONS COMMON ─── */
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--light);
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    line-height: 0.95;
+    color: var(--black);
+    margin-bottom: 3.5rem;
+  }
+  .section-title .accent { color: var(--mid); }
+
+  /* ─── VALEUR ─── */
+  #valeur { padding: 7rem 5vw; background: var(--bg); }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .value-card {
+    background: var(--bg);
+    padding: 2.5rem 1.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .value-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--black);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .value-card:hover::after { transform: scaleX(1); }
+  .value-card:hover { background: var(--bg2); }
+
+  .value-icon { font-size: 2rem; margin-bottom: 1.2rem; display: block; }
+  .value-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.7rem;
+    color: var(--black);
+  }
+  .value-card p { font-size: 0.88rem; line-height: 1.75; color: var(--mid); }
+
+  /* ─── PRODUITS ─── */
+  #produits { padding: 7rem 5vw; background: var(--bg2); }
+
+  .products-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    flex-wrap: wrap; gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .filter-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tab {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--light);
+    padding: 0.45rem 1.1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+  }
+  .tab.active, .tab:hover {
+    background: var(--black);
+    color: #fff;
+    border-color: var(--black);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
+
+  /* ── Product image container ── */
+  .product-img {
+    height: 240px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+    padding: 1.5rem;
+  }
+
+  /* ── Product <img> tag ── */
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;           /* never crops the shoe */
+    object-position: center;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.18));
+  }
+  .product-card:hover .product-img img {
+    transform: scale(1.06) translateY(-4px);
+  }
+
+  .product-badge {
+    position: absolute; top: 1rem; left: 1rem;
+    background: var(--black);
+    color: #fff;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    padding: 0.22rem 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+
+  .product-info { padding: 1.4rem; }
+  .stars { color: var(--black); font-size: 0.82rem; margin-bottom: 0.4rem; }
+  .product-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.25rem;
+    color: var(--black);
+  }
+  .product-sub {
+    font-size: 0.77rem;
+    color: var(--light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Barlow Condensed', sans-serif;
+    margin-bottom: 1rem;
+  }
+  .product-footer { display: flex; justify-content: space-between; align-items: center; }
+
+  .price { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--black); }
+  .price-old { font-size: 0.85rem; color: var(--light); text-decoration: line-through; margin-right: 0.4rem; }
+
+  .add-btn {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--dark);
+    padding: 0.45rem 0.9rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+  }
+  .add-btn:hover { background: var(--black); color: #fff; border-color: var(--black); }
+
+  /* ─── SOCIAL ─── */
+  #social { padding: 7rem 5vw; background: var(--bg); }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 5rem;
+  }
+
+  .stat-box { background: var(--bg); padding: 2.5rem; text-align: center; }
+  .stat-num {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    color: var(--black);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-top: 0.4rem;
+  }
+
+  .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  .review-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.8rem;
+    position: relative;
+  }
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: -0.5rem; left: 1.2rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4.5rem;
+    color: var(--black);
+    opacity: 0.07;
+    line-height: 1;
+  }
+
+  .review-stars { color: var(--black); font-size: 0.82rem; margin-bottom: 0.9rem; }
+  .review-text { font-size: 0.9rem; line-height: 1.75; color: var(--mid); margin-bottom: 1.4rem; font-style: italic; }
+  .reviewer { display: flex; align-items: center; gap: 0.9rem; }
+  .reviewer-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    color: #fff;
+  }
+  .reviewer-name { font-family: 'Barlow Condensed', sans-serif; font-size: 0.95rem; letter-spacing: 1px; font-weight: 700; color: var(--black); }
+  .reviewer-city { font-size: 0.72rem; color: var(--light); letter-spacing: 2px; text-transform: uppercase; }
+
+  /* ─── FAQ ─── */
+  #faq { padding: 7rem 5vw; background: var(--bg2); }
+
+  .faq-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: start; }
+  .faq-item { border-bottom: 1px solid var(--border); }
+
+  .faq-q {
+    width: 100%;
+    background: none; border: none; color: var(--dark);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.6rem 0;
+    cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    text-align: left;
+    transition: color 0.2s;
+  }
+  .faq-q:hover { color: var(--black); }
+  .faq-q.open { color: var(--black); }
+
+  .faq-icon {
+    width: 26px; height: 26px;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .faq-q.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.4s; }
+  .faq-a.open { max-height: 200px; padding-bottom: 1.4rem; }
+  .faq-a p { font-size: 0.9rem; line-height: 1.8; color: var(--mid); }
+
+  /* ─── CTA FINAL ─── */
+  #cta-final {
+    padding: 9rem 5vw;
+    background: var(--black);
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+
+  .cta-bg-line {
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 80px);
+    pointer-events: none;
+  }
+
+  .cta-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.6);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 0.35rem 1rem;
+    margin-bottom: 1.5rem;
+    position: relative; z-index: 2;
+  }
+
+  .cta-final-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 8vw, 7.5rem);
+    line-height: 0.92;
+    color: #fff;
+    position: relative; z-index: 2;
+  }
+  .cta-final-title span { color: rgba(255,255,255,0.4); }
+
+  .cta-final-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    margin: 1.8rem auto;
+    max-width: 460px;
+    position: relative; z-index: 2;
+    line-height: 1.7;
+  }
+
+  .countdown-wrap { display: flex; gap: 1.2rem; justify-content: center; margin: 2rem 0; position: relative; z-index: 2; flex-wrap: wrap; }
+  .countdown-box { text-align: center; }
+  .countdown-num {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3rem);
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    width: 72px;
+    line-height: 1.4;
+    color: #fff;
+  }
+  .countdown-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 0.4rem; }
+  .countdown-sep { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+  .cta-final-btns { display: flex; gap: 1rem; justify-content: center; position: relative; z-index: 2; flex-wrap: wrap; margin-top: 0.5rem; }
+
+  .btn-xl { background: #fff; color: var(--black); padding: 1.1rem 3rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 4px; border: none; cursor: pointer; transition: all 0.25s; }
+  .btn-xl:hover { background: var(--border); }
+
+  .btn-xl-outline { background: transparent; color: rgba(255,255,255,0.6); padding: 1.1rem 2.5rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 4px; border: 1.5px solid rgba(255,255,255,0.2); cursor: pointer; transition: all 0.25s; }
+  .btn-xl-outline:hover { border-color: #fff; color: #fff; }
+
+  /* ─── FOOTER ─── */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 2.5rem 5vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  footer .logo { font-size: 1.4rem; }
+  .footer-links { display: flex; gap: 1.8rem; list-style: none; flex-wrap: wrap; }
+  .footer-links a { color: var(--light); text-decoration: none; font-family: 'Barlow Condensed', sans-serif; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--black); }
+  .footer-copy { color: var(--light); font-size: 0.78rem; letter-spacing: 1px; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @keyframes spin-badge { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+  .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    #hero { grid-template-columns: 1fr; padding-top: 70px; text-align: center; min-height: auto; padding-bottom: 3rem; }
+    .hero-content { order: 2; padding-bottom: 2rem; }
+    .hero-visual { order: 1; height: 50vw; min-height: 260px; margin-top: 1rem; }
+    .hero-btns { justify-content: center; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-stripe { display: none; }
+    .sneaker-stage { width: min(340px, 80vw); height: min(340px, 80vw); }
+    .badge-float { width: 64px; height: 64px; font-size: 0.65rem; top: 2%; right: 2%; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .faq-layout { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 0.9rem 4vw; }
+    #hero { padding: 70px 4vw 2rem; gap: 0; }
+    .hero-visual { height: 55vw; min-height: 220px; }
+    .sneaker-stage { width: min(280px, 75vw); height: min(280px, 75vw); }
+    .values-grid { grid-template-columns: 1fr; }
+    .products-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .products-header { flex-direction: column; align-items: flex-start; }
+    #valeur, #produits, #social, #faq { padding: 4rem 4vw; }
+    #cta-final { padding: 5rem 4vw; }
+    .section-title { margin-bottom: 2rem; }
+    .cta-final-btns { flex-direction: column; align-items: center; }
+    .btn-xl, .btn-xl-outline { width: 100%; max-width: 320px; }
+    .countdown-num { width: 58px; font-size: 2rem; }
+    footer { padding: 2rem 4vw; }
+  }
+
+  @media (max-width: 400px) {
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; text-align: center; }
+    .filter-tabs { gap: 0.35rem; }
+    .tab { font-size: 0.72rem; padding: 0.35rem 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">URBAN<span>KICKS</span></div>
+  <ul class="nav-links">
+    <li><a href="#produits">Shop</a></li>
+    <li><a href="#valeur">Brand</a></li>
+    <li><a href="#social">Reviews</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <button class="nav-cta" onclick="window.location='#produits'">SHOP NOW</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#produits" onclick="toggleMenu()">Shop</a>
+  <a href="#valeur" onclick="toggleMenu()">Brand</a>
+  <a href="#social" onclick="toggleMenu()">Reviews</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-stripe"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">🔥 Nouvelle Collection 2026</div>
+    <h1 class="hero-title">
+      STEP<br>
+      <span class="line2">INTO THE</span>
+      <span class="line3">FUTURE</span>
+    </h1>
+    <p class="hero-sub">Les sneakers qui définissent la culture urbaine. Faites pour les rues, conçues pour dominer.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="window.location='#produits'">🛒 SHOP LA COLLECTION</button>
+      <button class="btn-secondary" onclick="window.location='#produits'">VOIR LES DROPS</button>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="sneaker-stage">
+      <div class="sneaker-glow" id="sneaker-glow"></div>
+
+      <!--
+        ════════════════════════════════════════════════
+        HERO SNEAKER SLIDER — HOW TO ADD YOUR IMAGES
+        ════════════════════════════════════════════════
+
+        Each .sneaker-slide is one color variant.
+        Replace the src="images/hero-sneaker-orange.png"
+        with the actual filename of your PNG image.
+
+        Your images folder structure should be:
+          public/
+          └── images/
+              ├── hero-sneaker-orange.png
+              ├── hero-sneaker-white.png
+              ├── hero-sneaker-black.png
+              ├── hero-sneaker-blue.png
+              └── hero-sneaker-red.png
+
+        Tips for best results:
+        - PNG with transparent background ✅
+        - Recommended size: 800x600px minimum
+        - Shoot or export the shoe facing right (side profile)
+        - Keep consistent framing across all colors
+        ════════════════════════════════════════════════
+      -->
+
+      <!-- Slide 1: Orange -->
+      <div class="sneaker-slide active" data-color="#f0c8b0">
+        <img
+          class="sneaker-img"
+          src="./images/orange.png"
+          alt="UK Blaze Pro — coloris orange"
+          onerror="this.style.opacity='0.3'"
+        />
+      </div>
+
+      <!-- Slide 2: White -->
+      <div class="sneaker-slide" data-color="#d0d0d0">
+        <img
+          class="sneaker-img"
+          src="./images/grey.png"
+          alt="UK Blaze Pro — coloris blanc"
+          onerror="this.style.opacity='0.3'"
+        />
+      </div>
+
+      <!-- Slide 3: Black -->
+      <div class="sneaker-slide" data-color="#888">
+        <img
+          class="sneaker-img"
+          src="./images/black.png"
+          alt="UK Blaze Pro — coloris noir"
+          onerror="this.style.opacity='0.3'"
+        />
+      </div>
+
+      <!-- Slide 4: Blue -->
+      <div class="sneaker-slide" data-color="#c0c8e0">
+        <img
+          class="sneaker-img"
+          src="./images/blue.png"
+          alt="UK Blaze Pro — coloris bleu"
+          onerror="this.style.opacity='0.3'"
+        />
+      </div>
+
+      <!-- Slide 5: Red -->
+      <div class="sneaker-slide" data-color="#e0b0b0">
+        <img
+          class="sneaker-img"
+          src="./images/Redsneakers.png"
+          alt="UK Blaze Pro — coloris rouge"
+          onerror="this.style.opacity='0.3'"
+        />
+      </div>
+
+      <div class="color-dots" id="dots">
+        <div class="dot active" style="background:#ff4d00" data-index="0"></div>
+        <div class="dot" style="background:#ccc;border:1.5px solid #aaa" data-index="1"></div>
+        <div class="dot" style="background:#222" data-index="2"></div>
+        <div class="dot" style="background:#3366ff" data-index="3"></div>
+        <div class="dot" style="background:#ee2222" data-index="4"></div>
+      </div>
+
+      <div class="badge-float">NEW<br>DROP</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>URBAN KICKS</span><span>★</span><span>STREET YOUR STYLE</span><span>★</span>
+    <span>NEW DROP 2026</span><span>★</span><span>LIVRAISON 48H</span><span>★</span>
+    <span>FREE RETURNS</span><span>★</span><span>URBAN KICKS</span><span>★</span>
+    <span>STREET YOUR STYLE</span><span>★</span><span>NEW DROP 2026</span><span>★</span>
+    <span>LIVRAISON 48H</span><span>★</span><span>FREE RETURNS</span><span>★</span>
+  </div>
+</div>
+
+<!-- VALEUR -->
+<section id="valeur">
+  <div class="section-label reveal">— Pourquoi Urban Kicks</div>
+  <h2 class="section-title reveal">LA MARQUE QUI<br>COMPREND<br><span class="accent">TA CULTURE</span></h2>
+  <div class="values-grid reveal">
+    <div class="value-card">
+      <span class="value-icon">⚡</span>
+      <h3>DESIGN EXCLUSIF</h3>
+      <p>Chaque coloris est une édition limitée. Nos designers capturent l'énergie des rues pour créer des paires uniques.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🧱</span>
+      <h3>QUALITÉ PREMIUM</h3>
+      <p>Semelles haute résistance, matériaux respirants. Conçues pour durer dans la rue comme en salle.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🚀</span>
+      <h3>LIVRAISON 48H</h3>
+      <p>Commandé aujourd'hui, reçu après-demain. Livraison express partout en France et en Europe.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">♻️</span>
+      <h3>RETOURS GRATUITS</h3>
+      <p>30 jours pour changer d'avis. Retour sans friction, remboursement immédiat. Zéro risque.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUITS -->
+<section id="produits">
+  <div class="products-header reveal">
+    <div>
+      <div class="section-label">— Collection 2026</div>
+      <h2 class="section-title" style="margin-bottom:0">LES <span class="accent">DROPS</span></h2>
+    </div>
+    <div class="filter-tabs">
+      <button class="tab active">Tous</button>
+      <button class="tab">Running</button>
+      <button class="tab">Lifestyle</button>
+      <button class="tab">Basketball</button>
+    </div>
+  </div>
+
+  <div class="products-grid">
+
+    <!--
+      ════════════════════════════════════════════════
+      PRODUCT CARDS — HOW TO ADD YOUR IMAGES
+      ════════════════════════════════════════════════
+      Replace src="images/product-blaze-pro.png"
+      with your actual image filename.
+
+      Recommended image size: 600x500px
+      Format: PNG with transparent background
+      ════════════════════════════════════════════════
+    -->
+
+    <!-- Product 1: UK Blaze Pro -->
+    <div class="product-card reveal">
+      <div class="product-img" style="background: linear-gradient(135deg, #fff5f0, #ffe8e0)">
+        <div class="product-badge">🔥 BEST-SELLER</div>
+        <img
+          src="./images/black.png"
+          alt="orange_sneakers"
+          onerror="this.style.opacity='0.2'"
+        />
+      </div>
+      <div class="product-info">
+        <div class="stars">★★★★★</div>
+        <h3>UK BLAZE PRO</h3>
+        <div class="product-sub">Street Running · 5 coloris</div>
+        <div class="product-footer">
+          <div><span class="price-old">159€</span><span class="price">119€</span></div>
+          <button class="add-btn">+ PANIER</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2: UK Flash X -->
+    <div class="product-card reveal" style="transition-delay:0.1s">
+      <div class="product-img" style="background: linear-gradient(135deg, #f8f8f8, #ececec)">
+        <div class="product-badge" style="background:#555">⚡ NEW</div>
+        <img
+          src="./images/grey.png"
+          alt="UK Flash X"
+          onerror="this.style.opacity='0.2'"
+        />
+      </div>
+      <div class="product-info">
+        <div class="stars">★★★★☆</div>
+        <h3>UK FLASH X</h3>
+        <div class="product-sub">Lifestyle · Édition Limitée</div>
+        <div class="product-footer">
+          <div><span class="price">139€</span></div>
+          <button class="add-btn">+ PANIER</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3: UK Drift Low -->
+    <div class="product-card reveal" style="transition-delay:0.2s">
+      <div class="product-img" style="background: linear-gradient(135deg, #f0f2ff, #e0e5ff)">
+        <img
+          src="./images/blue.png"
+          alt="UK Drift Low"
+          onerror="this.style.opacity='0.2'"
+        />
+      </div>
+      <div class="product-info">
+        <div class="stars">★★★★★</div>
+        <h3>UK DRIFT LOW</h3>
+        <div class="product-sub">Basketball · Urban</div>
+        <div class="product-footer">
+          <div><span class="price-old">189€</span><span class="price">149€</span></div>
+          <button class="add-btn">+ PANIER</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section id="social">
+  <div class="section-label reveal">— Ils ont adopté l'Urban</div>
+  <h2 class="section-title reveal">LA COMMUNAUTÉ<br>PARLE</h2>
+
+  <div class="stats-row reveal">
+    <div class="stat-box"><span class="stat-num">48K+</span><div class="stat-label">Clients satisfaits</div></div>
+    <div class="stat-box"><span class="stat-num">4.9</span><div class="stat-label">Note moyenne</div></div>
+    <div class="stat-box"><span class="stat-num">12</span><div class="stat-label">Coloris dispo</div></div>
+    <div class="stat-box"><span class="stat-num">48H</span><div class="stat-label">Livraison</div></div>
+  </div>
+
+  <div class="reviews-grid reveal">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Ces sneakers sont incroyables. Le coloris orange est exactement ce que je cherchais — personne d'autre en a dans mon lycée. La qualité est au niveau des grandes marques pour la moitié du prix.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#ff4d00">K</div>
+        <div><div class="reviewer-name">KARIM B.</div><div class="reviewer-city">Paris, 19ème</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Je les porte pour mes sessions de basket et pour sortir. Ultra confortables, elles tiennent bien le pied. La paire bleue a des détails vraiment stylés. Je rachèterai sans hésiter.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#3366ff">S</div>
+        <div><div class="reviewer-name">SOFIA L.</div><div class="reviewer-city">Lyon</div></div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Livraison ultra rapide (reçu en 24h !), packaging stylé, et les UK Flash X sont juste parfaites. La semelle blanche claque trop dans la rue. 10/10 je recommande à tout le monde.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background:#555">T</div>
+        <div><div class="reviewer-name">THOMAS R.</div><div class="reviewer-city">Marseille</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-layout">
+    <div>
+      <div class="section-label reveal">— Questions fréquentes</div>
+      <h2 class="section-title reveal">T'AS DES<br><span class="accent">QUESTIONS ?</span></h2>
+      <p style="color:var(--mid); font-size:0.92rem; line-height:1.8; margin-top: 1rem;" class="reveal">
+        On est là pour toi. Si tu ne trouves pas ta réponse ici, contacte-nous sur Instagram <strong style="color:var(--black)">@UrbanKicks</strong>.
+      </p>
+    </div>
+    <div class="faq-wrap reveal">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Comment choisir ma taille ?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Nos sneakers taillent normalement. Si tu es entre deux tailles, prends la taille supérieure pour plus de confort. Consulte notre guide des tailles sur chaque fiche produit.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Quels sont les délais de livraison ?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Livraison standard en 48h ouvrées pour la France. Express en 24h disponible à +5€. Europe entre 3 et 5 jours. Gratuite à partir de 80€ d'achat.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Comment fonctionne le retour gratuit ?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>30 jours pour retourner ta commande sans justification. Sneakers non portées (état neuf). Imprime ton étiquette de retour depuis ton espace client et dépose le colis en point relais.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Les coloris sont-ils en édition limitée ?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Oui ! Chaque coloris est produit en quantité limitée. Une fois le stock épuisé, la colorway ne revient pas. Abonne-toi à nos alertes drops pour ne rien rater.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Puis-je personnaliser mes sneakers ?<span class="faq-icon">+</span></button>
+        <div class="faq-a"><p>Un service de personnalisation "UK Custom" est disponible pour certains modèles. Choisis tes couleurs, matières et lacets. Délai supplémentaire de 7-10 jours.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-bg-line"></div>
+  <div class="cta-label">⏱️ OFFRE LIMITÉE</div>
+  <h2 class="cta-final-title">REJOINS<br><span>L'URBAN</span><br>MOVEMENT</h2>
+  <p class="cta-final-sub">-25% sur ta première commande. Profites-en avant la fin du drop.</p>
+  <div class="countdown-wrap">
+    <div class="countdown-box"><span class="countdown-num" id="hours">05</span><div class="countdown-label">Heures</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-box"><span class="countdown-num" id="minutes">47</span><div class="countdown-label">Minutes</div></div>
+    <div class="countdown-sep">:</div>
+    <div class="countdown-box"><span class="countdown-num" id="seconds">33</span><div class="countdown-label">Secondes</div></div>
+  </div>
+  <div class="cta-final-btns">
+    <button class="btn-xl">🛒 SHOPPER MAINTENANT</button>
+    <button class="btn-xl-outline">VOIR TOUS LES DROPS</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">URBAN<span>KICKS</span></div>
+  <ul class="footer-links">
+    <li><a href="#">Shop</a></li>
+    <li><a href="#">À propos</a></li>
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">Contact</a></li>
+    <li><a href="#">Mentions légales</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Urban Kicks. All rights reserved.</div>
+</footer>
+
+<script>
+  // MOBILE MENU
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  // SNEAKER SLIDER
+  const slides = document.querySelectorAll('.sneaker-slide');
+  const dots   = document.querySelectorAll('.dot');
+  const glow   = document.getElementById('sneaker-glow');
+  let current  = 0;
+  const glowColors = ['#f0c8b0','#d0d0d0','#888','#c0c8e0','#e0b0b0'];
+
+  function goTo(i) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = i;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    glow.style.background = glowColors[current];
+  }
+
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
+  setInterval(() => goTo((current + 1) % slides.length), 2600);
+
+  // SCROLL REVEAL
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+
+  // FAQ
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(q => {
+      q.classList.remove('open');
+      q.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+  }
+
+  // FILTER TABS
+  document.querySelectorAll('.tab').forEach(t => {
+    t.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+    });
+  });
+
+  // COUNTDOWN
+  let endTime = Date.now() + (5 * 3600 + 47 * 60 + 33) * 1000;
+  function updateCountdown() {
+    const left = Math.max(0, endTime - Date.now());
+    document.getElementById('hours').textContent   = Math.floor(left/3600000).toString().padStart(2,'0');
+    document.getElementById('minutes').textContent = Math.floor((left%3600000)/60000).toString().padStart(2,'0');
+    document.getElementById('seconds').textContent = Math.floor((left%60000)/1000).toString().padStart(2,'0');
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // TOUCH SWIPE
+  let touchStartX = 0;
+  document.querySelector('.sneaker-stage').addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  });
+  document.querySelector('.sneaker-stage').addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) {
+      goTo(diff > 0 ? (current + 1) % slides.length : (current - 1 + slides.length) % slides.length);
+    }
+  });
+</script>
+</body>
+</html>
